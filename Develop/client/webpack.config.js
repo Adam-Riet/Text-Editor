@@ -18,13 +18,54 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        title: 'jate'
+      }),
+      new WebpackPwaManifest({
+        name: 'jate',
+        short_name: 'jate',
+        description: 'jate',
+        images: [
+          {
+            src: path.resolve('src/images/icon.png'),
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ]
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'sw.js',
+      }),
     ],
-
     module: {
       rules: [
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+              },
+            },
+        },
         
       ],
     },
   };
 };
+
+
+
+
+
+
+
+
