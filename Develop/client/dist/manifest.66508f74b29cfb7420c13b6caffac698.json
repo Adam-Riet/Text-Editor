@@ -1,0 +1,15 @@
+{
+  "name": "jate",
+  "short_name": "jate",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "jate",
+  "images": [
+    {
+      "src": "/Users/adamriet/bootcamp/Text-Editor/Develop/client/src/images/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
