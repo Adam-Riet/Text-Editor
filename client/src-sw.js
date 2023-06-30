@@ -37,8 +37,17 @@ const assetCache = CacheFirst({
       maxAgeSeconds: 30 * 24 * 60 * 60,
     }),
   ],
-}
+});
 
-)
+offlineFallback({
+  pageFallback: '/index.html',
+  imageFallback: '/images/offline.png',
+  documentFallback: '/index.html',
+  cacheName: 'offline-cache',
+  fallbacks: {
+    image: ({ request }) => request.destination === 'image',
+    document: ({ request }) => request.destination === 'document',
+  },
+});
 
 registerRoute(({ request }) => request.destination === 'script' || request.destination === 'style', assetCache);
